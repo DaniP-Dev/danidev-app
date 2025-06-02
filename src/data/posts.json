@@ -1,0 +1,14 @@
+[
+    {
+        "slug": "mi-primer-post",
+        "title": "Mi Primer Post",
+        "date": "2025-06-01",
+        "content": "Contenido de ejemplo…"
+    },
+    {
+        "slug": "otro-articulo",
+        "title": "Otro Artículo",
+        "date": "2025-06-10",
+        "content": "Más contenido…"
+    }
+]

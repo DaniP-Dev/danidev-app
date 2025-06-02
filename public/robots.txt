@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.tudominio.com
+
+# Sitemaps
+Sitemap: https://www.tudominio.com/sitemap.xml
