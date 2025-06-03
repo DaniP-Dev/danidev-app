@@ -1,26 +1,681 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------ */
+/* 1. Definición de variables en :root              */
+/* ------------------------------------------------ */
 :root {
+  /* Paleta principal: Azul suave */
+  --primary-base: #98b1da;
+  --primary-light: #bac8eb;
+  --primary-dark: #7a8dbf;
+
+  /* Paleta secundaria: Cian turquesa */
+  --secondary-base: #57d7e0;
+  --secondary-light: #8fe7ef;
+  --secondary-dark: #2fb4b8;
+
+  /* Acento oscuro: Púrpura */
+  --accent-base: #89027b;
+  --accent-light: #a23f9e;
+  --accent-dark: #65015f;
+
+  /* Éxito: Verde */
+  --success-base: #337535;
+  --success-light: #5e9457;
+  --success-dark: #235326;
+
+  /* Advertencia: Melocotón */
+  --warning-base: #fccc82;
+  --warning-light: #fddda8;
+  --warning-dark: #dcaa58;
+
+  /* Información/Neutro especial: Rosa-violeta */
+  --info-base: #b77fae;
+  --info-light: #d598c4;
+  --info-dark: #8f4f87;
+
+  /* Fondo y primer plano */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Neutro claro para fondo general (se usará en body) */
+  --neutral-bg: #e4e2d6; /* Color neutro claro (beige grisáceo) */
+  --neutral-light: #f4f4f4; /* o el tono claro que prefieras */
+
+  /* Si tienes fuentes personalizadas, defínelas aquí:
+     --font-geist-sans: 'Geist Sans', sans-serif;
+     --font-geist-mono: 'Geist Mono', monospace;
+     --font-sans: var(--font-geist-sans);
+     --font-mono: var(--font-geist-mono);
+  */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* ------------------------------------------------ */
+/* 2. Modo oscuro / dark mode override              */
+/* ------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Sobrescribimos fondo y primer plano */
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Neutral oscuro para fondo general en modo oscuro */
+    --neutral-bg: #171717;
+
+    /* Si quieres cambiar otros neutros o acentos en modo oscuro:
+       --neutral-surface: #1f1f1f;
+       --text-muted: #b3b3b3;
+       etc.
+    */
   }
 }
 
+/* ------------------------------------------------ */
+/* 3. Reset / Estilos globales de body, html, etc.  */
+/* ------------------------------------------------ */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  background-color: var(--neutral-bg); /* usa el neutro definido arriba */
+  color: var(--foreground); /* texto principal */
   font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+/* ---------------------------------------------------------------- */
+/* 1. BOTONES                                                       */
+/* ---------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary {
+  background-color: var(--primary-base);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-light);
+}
+.btn-primary:active {
+  background-color: var(--primary-dark);
+}
+.btn-primary:disabled {
+  background-color: var(--primary-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background-color: var(--secondary-base);
+  color: #ffffff;
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-light);
+}
+.btn-secondary:active {
+  background-color: var(--secondary-dark);
+}
+.btn-secondary:disabled {
+  background-color: var(--secondary-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-accent {
+  background-color: var(--accent-base);
+  color: #ffffff;
+}
+.btn-accent:hover {
+  background-color: var(--accent-light);
+}
+.btn-accent:active {
+  background-color: var(--accent-dark);
+}
+.btn-accent:disabled {
+  background-color: var(--accent-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-success {
+  background-color: var(--success-base);
+  color: #ffffff;
+}
+.btn-success:hover {
+  background-color: var(--success-light);
+}
+.btn-success:active {
+  background-color: var(--success-dark);
+}
+.btn-success:disabled {
+  background-color: var(--success-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-warning {
+  background-color: var(--warning-base);
+  color: var(--foreground);
+}
+.btn-warning:hover {
+  background-color: var(--warning-light);
+}
+.btn-warning:active {
+  background-color: var(--warning-dark);
+}
+.btn-warning:disabled {
+  background-color: var(--warning-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-info {
+  background-color: var(--info-base);
+  color: #ffffff;
+}
+.btn-info:hover {
+  background-color: var(--info-light);
+}
+.btn-info:active {
+  background-color: var(--info-dark);
+}
+.btn-info:disabled {
+  background-color: var(--info-light);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 2. TEXTOS (COLORES TIPOGRÁFICOS) */
+.text-primary {
+  color: var(--primary-base);
+}
+.text-secondary {
+  color: var(--secondary-base);
+}
+.text-accent {
+  color: var(--accent-base);
+}
+.text-success {
+  color: var(--success-base);
+}
+.text-warning {
+  color: var(--warning-base);
+}
+.text-info {
+  color: var(--info-base);
+}
+.text-muted {
+  color: var(--info-dark);
+}
+
+/* 3. FONDOS (CLASES DE BACKGROUND) */
+.bg-base {
+  background-color: var(--background);
+}
+.bg-surface {
+  background-color: var(--secondary-light);
+}
+.bg-neutral-light {
+  background-color: var(--background);
+}
+.bg-neutral-medium {
+  background-color: var(--background);
+}
+.bg-neutral-dark {
+  background-color: var(--background);
+}
+.bg-primary {
+  background-color: var(--primary-base);
+}
+.bg-primary-light {
+  background-color: var(--primary-light);
+}
+.bg-primary-dark {
+  background-color: var(--primary-dark);
+}
+.bg-secondary {
+  background-color: var(--secondary-base);
+}
+.bg-secondary-light {
+  background-color: var(--secondary-light);
+}
+.bg-secondary-dark {
+  background-color: var(--secondary-dark);
+}
+.bg-accent {
+  background-color: var(--accent-base);
+}
+.bg-accent-light {
+  background-color: var(--accent-light);
+}
+.bg-accent-dark {
+  background-color: var(--accent-dark);
+}
+.bg-success {
+  background-color: var(--success-base);
+}
+.bg-success-light {
+  background-color: var(--success-light);
+}
+.bg-success-dark {
+  background-color: var(--success-dark);
+}
+.bg-warning {
+  background-color: var(--warning-base);
+}
+.bg-warning-light {
+  background-color: var(--warning-light);
+}
+.bg-warning-dark {
+  background-color: var(--warning-dark);
+}
+.bg-info {
+  background-color: var(--info-base);
+}
+.bg-info-light {
+  background-color: var(--info-light);
+}
+.bg-info-dark {
+  background-color: var(--info-dark);
+}
+
+/* 4. TARJETAS / CARDS */
+.card {
+  background-color: var(--background);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.card-surface {
+  background-color: var(--secondary-dark);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+/* 5. CONTENEDORES / LAYOUT */
+.container-global {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grid-2cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .grid-2cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 6. ENCABEZADOS Y TIPOGRAFÍA */
+.heading-primary {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary-base);
+  line-height: 1.2;
+}
+.heading-secondary {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent-base);
+  line-height: 1.3;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--info-dark);
+}
+
+/* 7. ENLACES CON EFECTO “UNDERLINE” AL PASAR EL MOUSE */
+.link-underline-hover {
+  position: relative;
+  color: var(--secondary-base);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.link-underline-hover::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: var(--secondary-base);
+  transition: width 0.3s ease;
+}
+.link-underline-hover:hover {
+  color: var(--secondary-light);
+}
+.link-underline-hover:hover::after {
+  width: 100%;
+}
+
+/* 8. FORMULARIOS (INPUTS, LABELS, ERRORES) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+}
+.form-input {
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--primary-light); /* Borde más visible y de color de marca */
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #fff;
+  color: #1F2937; /* Gris oscuro, excelente contraste */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-base);
+  box-shadow: 0 0 0 2px rgba(152, 177, 218, 0.25);
+}
+.form-input:disabled {
+  background-color: #f4f4f4;
+  color: #b3b3b3;
+  cursor: not-allowed;
+}
+.form-input::placeholder {
+  color: #6B7280; /* gris medio, visible pero no dominante */
+  opacity: 1;
+}
+.form-error {
+  font-size: 0.875rem;
+  color: var(--warning-dark);
+  margin-top: 0.25rem;
+}
+
+/* 9. AVATARES / IMÁGENES REDONDAS */
+.avatar-circle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  background-color: var(--neutral-light);
+}
+
+/* 10. UTILIDADES VARIAS */
+.truncate-3-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.shadow-hover:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* -------------------------------------------- */
+/* MOBILE-FIRST: estilos base (móvil) y luego adaptaciones */
+/* -------------------------------------------- */
+
+/* 1. Contenedor centrado */
+.container-global {
+  max-width: 100%;       /* en móvil ocupa todo el ancho */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 1024px) {
+  .container-global {
+    max-width: 1200px;   /* en desktop limita a 1200px */
+  }
+}
+
+/* 2. Grid de dos columnas */
+.grid-2cols {
+  display: grid;
+  grid-template-columns: 1fr; /* una sola columna en móvil */
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .grid-2cols {
+    grid-template-columns: 1fr 1fr; /* dos columnas en tablet/desktop */
+  }
+}
+
+/* 3. Encabezados y texto */
+.heading-primary {
+  font-size: 1.5rem;     /* text-2xl en móvil */
+}
+@media (min-width: 768px) {
+  .heading-primary {
+    font-size: 2rem;     /* text-3xl en pantallas más amplias */
+  }
+}
+
+.heading-secondary {
+  font-size: 1.25rem;    /* text-xl en móvil */
+}
+@media (min-width: 768px) {
+  .heading-secondary {
+    font-size: 1.5rem;   /* text-2xl en pantallas más amplias */
+  }
+}
+
+.text-base {
+  font-size: 0.875rem;   /* text-sm en móvil */
+}
+@media (min-width: 768px) {
+  .text-base {
+    font-size: 1rem;     /* text-base en pantallas más amplias */
+  }
+}
+
+.text-small {
+  font-size: 0.75rem;    /* text-xs en móvil */
+}
+@media (min-width: 768px) {
+  .text-small {
+    font-size: 0.875rem; /* text-sm en pantallas más amplias */
+  }
+}
+
+/* 4. Tarjetas (cards) */
+.card {
+  padding: 1rem;         /* p-4 en móvil */
+  gap: 0.75rem;          /* gap-3 en móvil */
+}
+@media (min-width: 768px) {
+  .card {
+    padding: 1.5rem;     /* p-6 en pantallas más amplias */
+    gap: 1rem;           /* gap-4 en pantallas más amplias */
+  }
+}
+
+.card-surface {
+  padding: 1rem;
+}
+@media (min-width: 768px) {
+  .card-surface {
+    padding: 1.5rem;
+  }
+}
+
+/* 5. Formularios */
+.form-group {
+  margin-bottom: 0.75rem;  /* mb-3 en móvil */
+}
+@media (min-width: 768px) {
+  .form-group {
+    margin-bottom: 1rem;   /* mb-4 en pantallas más amplias */
+  }
+}
+
+.form-label {
+  font-size: 0.75rem;      /* text-xs en móvil */
+}
+@media (min-width: 768px) {
+  .form-label {
+    font-size: 0.875rem;   /* text-sm en pantallas más amplias */
+  }
+}
+
+.form-input {
+  font-size: 0.875rem;     /* text-sm en móvil */
+}
+@media (min-width: 768px) {
+  .form-input {
+    font-size: 1rem;       /* text-base en pantallas más amplias */
+  }
+}
+
+.form-error {
+  font-size: 0.75rem;      /* text-xs en móvil */
+}
+@media (min-width: 768px) {
+  .form-error {
+    font-size: 0.875rem;   /* text-sm en pantallas más amplias */
+  }
+}
+
+/* 6. Utilidades de layout */
+.flex-between {
+  flex-wrap: wrap;         /* en móvil permite que bajen de línea */
+}
+@media (min-width: 768px) {
+  .flex-between {
+    flex-wrap: nowrap;     /* en pantallas amplias no hace wrap */
+  }
+}
+
+/* ------------------------------------------------ */
+/* ANIMACIONES Y TRANSICIONES MODERNAS (solo si no hay preferencia de reducción de movimiento) */
+/* ------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Fade-in */
+  @keyframes fade-in {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-in-out forwards;
+  }
+
+  /* 2. Slide-up */
+  @keyframes slide-up {
+    0%   { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0);     opacity: 1; }
+  }
+  .animate-slide-up {
+    animation: slide-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* 3. Pulse */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+  }
+  .animate-pulse {
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  /* 4. Bounce */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40%  { transform: translateY(-8px); }
+    60%  { transform: translateY(-4px); }
+  }
+  .animate-bounce {
+    animation: bounce 1.5s infinite;
+  }
+
+  /* 5. Botones: efecto “scale” al presionar */
+  .btn {
+    transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+  }
+  .btn:active {
+    transform: scale(0.96);
+  }
+
+  /* 6. Tarjetas: hover/focus con desplazamiento y sombra */
+  .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  /* 7. Imagen perezosa: fade-in al cargar */
+  img {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  img.loaded {
+    opacity: 1;
+  }
+
+  /* 8. Fade-up al hacer scroll (requiere JS para añadir “in-view”) */
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .animate-fade-up.in-view {
+    animation: fade-up 0.4s ease forwards;
+  }
 }
